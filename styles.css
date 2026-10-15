@@ -56,7 +56,7 @@ h1 em, h2 em { color: #a17d3c; font-weight: 500; }
 .hero-proof i { width: 1px; height: 34px; margin: 0 7px; background: var(--line); }
 .hero-portrait { position: relative; width: min(100%, 460px); height: 580px; justify-self: center; background: var(--pink); overflow: hidden; animation: rise-in .8s .12s both; }
 .hero-portrait::before { position: absolute; z-index: 1; inset: 12px; border: 1px solid rgba(231,210,166,.8); content: ""; pointer-events: none; }
-.hero-portrait img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 86% 77%; filter: saturate(.86); }
+.hero-portrait img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 86% 77%; transform: scale(2.1); transform-origin: 96% 62%; filter: saturate(.86); }
 .portrait-caption { position: absolute; z-index: 2; right: 26px; bottom: 25px; min-width: 150px; padding: 15px 17px; background: var(--ink); color: var(--white); }
 .portrait-caption span, .portrait-caption small, .portrait-caption strong { display: block; }
 .portrait-caption span { color: var(--gold-light); font-size: 7px; letter-spacing: .17em; }
