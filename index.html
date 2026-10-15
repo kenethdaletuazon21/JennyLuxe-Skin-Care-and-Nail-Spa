@@ -6,20 +6,20 @@
   <meta name="theme-color" content="#10213c">
   <meta name="description" content="JennyLuxe Skincare & Nail Spa in Angono, Rizal. Thoughtful skincare and nail care, built from 15+ years of experience.">
   <title>JennyLuxe | Skincare & Nail Spa</title>
+  <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+  <script src="booking-config.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="topline">2nd Floor, Glasshouse Business Center <span aria-hidden="true">·</span> Angono, Rizal <a href="tel:+639171669125">Call 0917 166 9125</a></div>
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="JennyLuxe home">
-      <span class="brand-mark" aria-hidden="true">J</span>
-      <span><strong>JENNYLUXE</strong><small>SKINCARE &amp; NAIL SPA</small></span>
-    </a>
+    <a class="brand" href="#top" aria-label="JennyLuxe home"><img class="brand-logo" src="assets/logo.jpg" alt="JennyLuxe Skincare &amp; Nail Spa"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
     <nav id="site-nav" class="site-nav" aria-label="Main navigation">
       <a href="#story">Our story</a><a href="#care">Our approach</a><a href="#visit">Find us</a>
@@ -39,7 +39,6 @@
       <div class="hero-portrait">
         <img src="assets/JL.jpg" alt="Jenny, founder and owner of JennyLuxe Skincare & Nail Spa" fetchpriority="high">
         <div class="portrait-caption"><span>MEET YOUR BEAUTY SPECIALIST</span><strong>Jenny</strong><small>Founder &amp; Owner</small></div>
-        <div class="portrait-seal"><span>BEAUTY IS OUR PASSION</span><b>J</b><span>CONFIDENCE IS OUR PURPOSE</span></div>
       </div>
       <div class="hero-note" aria-hidden="true">PERSONAL CARE, ROOTED IN EXPERIENCE</div>
     </section>
@@ -71,9 +70,9 @@
     <section class="booking section-pad" id="booking">
       <div class="section-kicker"><span>03</span><span>YOUR NEXT LITTLE RESET</span></div>
       <div class="booking-grid">
-        <div class="booking-copy"><h2>Make a little<br><em>time for you.</em></h2><p>Tell us what you're looking for and when you'd like to come in. We'll take it from there and confirm your appointment personally.</p><div class="booking-note"><span aria-hidden="true">i</span><p>Your preferred time is a request, not a confirmed reservation. The team will confirm availability and payment directly with you.</p></div></div>
+        <div class="booking-copy"><h2>Make a little<br><em>time for you.</em></h2><p>Choose an open appointment time and reserve it online. Your slot is held for 15 minutes while you arrange payment with the JennyLuxe team.</p><div class="booking-note"><span aria-hidden="true">i</span><p>A slot is held after the reservation succeeds. Your appointment is confirmed after the team verifies payment.</p></div></div>
         <form class="booking-form" id="booking-form">
-          <div class="form-heading"><span>APPOINTMENT REQUEST</span><span>WHATSAPP HANDOFF</span></div>
+          <div class="form-heading"><span>LIVE SLOT RESERVATION</span><span>15-MINUTE HOLD</span></div>
           <label for="service">What are you interested in?</label>
           <select id="service" name="service" required>
             <option value="" selected disabled>Choose a care category</option>
@@ -82,13 +81,14 @@
             <option>Beauty consultation</option>
             <option>I'm not sure yet</option>
           </select>
-          <div class="form-row"><div><label for="date">Preferred date</label><input id="date" name="date" type="date" required></div><div><label for="time">Preferred time</label><input id="time" name="time" type="time" required></div></div>
+          <div class="form-row"><div><label for="date">Appointment date</label><input id="date" name="date" type="date" required></div><div><label for="time">Available time</label><select id="time" name="slot_id" required disabled><option value="">Booking calendar needs setup</option></select></div></div>
           <div class="form-row"><div><label for="guest-name">Your name</label><input id="guest-name" name="name" autocomplete="name" placeholder="Name" required></div><div><label for="guest-phone">Mobile number</label><input id="guest-phone" name="phone" type="tel" autocomplete="tel" placeholder="09xx xxx xxxx" required></div></div>
           <label for="message">Anything you'd like us to know? <span>(optional)</span></label>
           <textarea id="message" name="message" rows="2" placeholder="A treatment you have in mind, questions, or preferences"></textarea>
-          <button class="button button-dark form-submit" type="submit">Continue in WhatsApp <span aria-hidden="true">↗</span></button>
-          <p class="form-privacy">Your details are added to a WhatsApp message for the JennyLuxe team. Nothing is submitted until you choose to send it.</p>
+          <button class="button button-dark form-submit" type="submit" disabled>Reserve this time <span aria-hidden="true">↗</span></button>
+          <p class="form-privacy" id="booking-help">The live calendar is not configured yet. Contact JennyLuxe on WhatsApp while the booking service is being connected.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          <a class="booking-whatsapp-link" id="booking-whatsapp" target="_blank" rel="noopener" hidden>Message JennyLuxe on WhatsApp for payment <span aria-hidden="true">↗</span></a>
         </form>
       </div>
     </section>
@@ -101,7 +101,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><a class="brand brand-footer" href="#top"><span class="brand-mark" aria-hidden="true">J</span><span><strong>JENNYLUXE</strong><small>SKINCARE &amp; NAIL SPA</small></span></a><p>Be your most beautiful. Be your most confident.</p><a href="#top">Back to top ↑</a><small>© <span id="year"></span> JennyLuxe Skincare &amp; Nail Spa</small></footer>
+  <footer class="site-footer"><a class="brand brand-footer" href="#top" aria-label="JennyLuxe home"><img class="brand-logo" src="assets/logo.jpg" alt="JennyLuxe Skincare &amp; Nail Spa"></a><p>Be your most beautiful. Be your most confident.</p><a href="admin.html">Bookings admin</a><a href="#top">Back to top ↑</a><small>© <span id="year"></span> JennyLuxe Skincare &amp; Nail Spa</small></footer>
 
   <div class="concierge" id="concierge">
     <section class="chat-panel" id="chat-panel" aria-label="JennyLuxe concierge" aria-hidden="true">

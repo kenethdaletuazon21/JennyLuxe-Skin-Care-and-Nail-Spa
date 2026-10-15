@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10213c">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Booking Admin | JennyLuxe</title>
+  <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+  <script src="booking-config.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <header class="admin-header">
+    <a href="index.html" aria-label="JennyLuxe website"><img src="assets/logo.jpg" alt="JennyLuxe Skincare &amp; Nail Spa"></a>
+    <span>BOOKING OPERATIONS</span>
+    <a class="public-site-link" href="index.html">Public website <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="admin-main">
+    <section class="login-view" id="login-view">
+      <p class="eyebrow">JENNYLUXE · OWNER ACCESS</p>
+      <h1>Reservations,<br><em>in good hands.</em></h1>
+      <p class="login-intro">Sign in to review live bookings, verify payments, and manage appointment times.</p>
+      <form class="login-form" id="login-form">
+        <label for="admin-email">Email address</label>
+        <input id="admin-email" name="email" type="email" autocomplete="username" required>
+        <label for="admin-password">Password</label>
+        <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="primary-button" type="submit">Sign in</button>
+        <p class="login-status" id="login-status" role="status" aria-live="polite">Checking booking service...</p>
+      </form>
+    </section>
+
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="dashboard-heading">
+        <div><p class="eyebrow">JENNYLUXE · LIVE BOOKINGS</p><h1>Good care,<br><em>well organized.</em></h1></div>
+        <button class="quiet-button" id="sign-out" type="button">Sign out</button>
+      </div>
+
+      <div class="metrics" aria-live="polite">
+        <div><span>AWAITING PAYMENT</span><strong id="pending-count">0</strong></div>
+        <div><span>CONFIRMED</span><strong id="confirmed-count">0</strong></div>
+        <div><span>UPCOMING SLOTS</span><strong id="slot-count">0</strong></div>
+      </div>
+
+      <section class="panel reservation-panel">
+        <div class="panel-heading"><div><p class="eyebrow">RESERVATIONS</p><h2>Appointment activity</h2></div>
+          <label class="filter-label" for="status-filter">Show <select id="status-filter"><option value="all">All reservations</option><option value="payment_pending">Awaiting payment</option><option value="confirmed">Confirmed</option><option value="cancelled">Cancelled</option><option value="expired">Expired holds</option></select></label>
+        </div>
+        <p class="dashboard-message" id="dashboard-message" role="status" aria-live="polite"></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>CLIENT</th><th>SERVICE</th><th>APPOINTMENT</th><th>RESERVATION</th><th>PAYMENT</th><th>ACTIONS</th></tr></thead>
+            <tbody id="reservation-rows"><tr><td colspan="6" class="empty-row">Sign in to load reservations.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="slot-management">
+        <div class="panel slot-create-panel">
+          <p class="eyebrow">SCHEDULE MANAGEMENT</p><h2>Add an appointment time</h2>
+          <form id="slot-form" class="slot-form">
+            <label for="slot-start">Date and time <input id="slot-start" name="starts_at" type="datetime-local" required></label>
+            <button class="primary-button" type="submit">Add slot</button>
+          </form>
+          <p class="form-hint">Times are entered in your browser's local timezone. Add only times the spa can honor.</p>
+        </div>
+        <div class="panel slot-list-panel">
+          <div class="panel-heading"><div><p class="eyebrow">LIVE AVAILABILITY</p><h2>Upcoming schedule</h2></div><span class="live-indicator" id="live-indicator" data-state="connecting"><i></i><span id="live-label">CONNECTING</span></span></div>
+          <div class="slot-list" id="slot-list"><p class="empty-row">Sign in to load appointment times.</p></div>
+        </div>
+      </section>
+      <p class="payment-note">Confirm payment only after checking your merchant/payment account. This dashboard does not process or verify payments automatically.</p>
+    </section>
+  </main>
+
+  <footer class="admin-footer"><span>JennyLuxe Skincare &amp; Nail Spa</span><a href="index.html">Return to website</a></footer>
+</body>
+</html>
